@@ -1,0 +1,85 @@
+/* ===== GENERAL PAGE STYLE ===== */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7ff;  /* albastru pastel foarte deschis */
+    margin: 20px;
+}
+
+/* ===== FORM SECTION ===== */
+form {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+}
+
+#todo-input {
+    padding: 14px;
+    border: 1px solid #80aaff;
+    border-radius: 6px;
+    outline: none;
+    font-size: 16px;
+}
+
+#todo-input:focus {
+    border-color: #4d88ff;
+}
+
+button[type="submit"] {
+    margin-top: 10px;
+    padding: 10px;
+    width: 120px;
+    background-color: #6aa6ff;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+button[type="submit"]:hover {
+    background-color: #5a92e8;
+}
+
+/* ===== TODO CARDS ===== */
+#todos div {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* ===== ALL SMALL BUTTONS ===== */
+#edit-btn,
+#delete-btn,
+#save-btn,
+#cancel-btn {
+    width: 80px;
+    height: 35px;       /* înălțime fixă pentru toate */
+    margin: 5px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: 14px;
+}
+
+/* COLORS */
+#edit-btn { background-color: bisque; color: #333; }
+#delete-btn { background-color: pink; color: #333; }
+#save-btn { background-color: #ffb3c6; }
+#cancel-btn { background-color: #ffe599; color: #333; }
+
+/* HOVER EFFECTS */
+#edit-btn:hover { background-color: #e6c9a1; }
+#delete-btn:hover { background-color: #ff99aa; }
+#save-btn:hover { background-color: #ff99aa; }
+#cancel-btn:hover { background-color: #ffdb4d; }
+
+/* ===== EDIT INPUT ===== */
+#edit-input {
+    margin-top: 5px;
+    padding: 6px;
+    width: 160px;
+    border: 1px solid #80aaff;
+    border-radius: 6px;
+    outline: none;
+}
