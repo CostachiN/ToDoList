@@ -5,94 +5,50 @@ const todosArr = JSON.parse(localStorage.getItem("todosDB")) ?? []
 
 loadInitialData(todosArr)
 
+function createTodoElement(id, text) {
+    const div = document.createElement("div");
+    div.setAttribute("id", id);
+
+    const p = document.createElement("p");
+    p.textContent = text;
+    
+    const editButton = document.createElement("button");
+    editButton.innerText = "Edit";
+    editButton.setAttribute("id", "edit-btn");
+
+    const deleteButton = document.createElement("button");
+    deleteButton.innerText = "Delete";
+    deleteButton.setAttribute("id", "delete-btn");
+
+    div.appendChild(p);
+    div.appendChild(editButton);
+    div.appendChild(deleteButton);
+
+    return div;
+}
+
 function loadInitialData(todos){
     for (const todo of todos){
-        const div = document.createElement("div");
-        const todoId = Date.now()
-        div.setAttribute("id", todo.id)
-        div.style.textAlign = "center";
-        div.style.marginTop = "10px";
-        div.style.padding = "10px";
-        div.style.border = "1px solid darkblue";
-        div.style.width = "200px";
-
-        const p = document.createElement("p");
-        p.textContent = todo.todoText;
-        p.style.margin = "3px";
-        p.style.marginRight = "20px";
-        
-        const editButton = document.createElement("button");
-        editButton.innerText = "Edit"
-        editButton.setAttribute("id", "edit-btn")
-        editButton.style.backgroundColor = "bisque"
-        editButton.style.width = "80px"
-        editButton.style.margin = "5px";
-        editButton.style.padding = "2px";
-
-        const deleteButton = document.createElement("button");
-        deleteButton.innerText = "Delete"
-        deleteButton.setAttribute("id", "delete-btn")
-        deleteButton.style.backgroundColor = "pink"
-        deleteButton.style.width = "80px"
-        deleteButton.style.margin = "5px";
-        deleteButton.style.padding = "2px";
-
-        div.appendChild(p);
-        div.appendChild(editButton);
-        div.appendChild(deleteButton);
-
-        todosContainer.appendChild(div);
+        const todoDiv = createTodoElement(todo.id, todo.todoText);
+        todosContainer.appendChild(todoDiv);
     }
 }
 
 form.addEventListener("submit", (e) =>{
     e.preventDefault();
+    if(!todoInput.value) return;
 
-    const div = document.createElement("div");
-    const todoId = Date.now()
-    div.setAttribute("id", todoId)
-    div.style.textAlign = "center";
-    div.style.marginTop = "10px";
-    div.style.padding = "10px";
-    div.style.border = "1px solid darkblue";
-    div.style.width = "200px";
-
-    const p = document.createElement("p");
-    p.textContent = todoInput.value;
-    p.style.margin = "3px";
-    p.style.marginRight = "20px";
-    
-    const editButton = document.createElement("button");
-    editButton.innerText = "Edit"
-    editButton.setAttribute("id", "edit-btn")
-    editButton.style.backgroundColor = "bisque"
-    editButton.style.width = "80px"
-    editButton.style.margin = "5px";
-    editButton.style.padding = "2px";
-
-    const deleteButton = document.createElement("button");
-    deleteButton.innerText = "Delete"
-    deleteButton.setAttribute("id", "delete-btn")
-    deleteButton.style.backgroundColor = "pink"
-    deleteButton.style.width = "80px"
-    deleteButton.style.margin = "5px";
-    deleteButton.style.padding = "2px";
-    
-    div.appendChild(p);
-    div.appendChild(editButton);
-    div.appendChild(deleteButton);
-
-    todosContainer.appendChild(div);
+    const todoId = Date.now();
+    const todoDiv = createTodoElement(todoId, todoInput.value);
+    todosContainer.appendChild(todoDiv);
 
     todosArr.push({
         id: todoId,
-        todoText: p.textContent
-    })
+        todoText: todoInput.value
+    });
 
-    localStorage.setItem("todosDB", JSON.stringify(todosArr))
-
+    localStorage.setItem("todosDB", JSON.stringify(todosArr));
     todoInput.value = "";  
-
 });
 
 todosContainer.addEventListener("click", (e) =>{
@@ -104,10 +60,8 @@ todosContainer.addEventListener("click", (e) =>{
 
     } else if(e.target.id === "edit-btn"){
         editTodo(e)
-
     } else if(e.target.id === "save-btn"){
         saveTodo(e)
-
     } else if(e.target.id === "cancel-btn"){
         cancelTodo(e)
     }
